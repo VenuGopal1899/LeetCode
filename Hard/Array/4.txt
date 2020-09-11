@@ -1,0 +1,19 @@
+# Contains Duplicate
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        int n = nums.size();
+        unordered_set<int> hs;
+        int ele;
+        for(int i=0; i<n; i++)
+        {
+            ele = nums[i];
+            if(hs.find(ele) != hs.end())
+                return true;
+            
+            hs.insert(ele);
+        }
+        return false;
+    }
+};
