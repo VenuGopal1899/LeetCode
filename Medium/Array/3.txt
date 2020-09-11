@@ -1,0 +1,40 @@
+# Group Anagrams
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>> res;
+        int len = strs.size();
+        
+        vector<string> tempStrs;
+        for(int i=0; i<len; i++)
+            tempStrs.push_back(strs[i]);
+        
+        for(int i=0; i<len; i++)
+            sort(tempStrs[i].begin(), tempStrs[i].end());
+        
+        vector<bool> visited(len, false);
+        
+        for(int i=0; i<len; i++)
+        {
+            if(visited[i] == false)
+            {
+                visited[i] = true;
+                vector<string> set;
+                set.push_back(strs[i]);
+
+                for(int j=i+1; j<len; j++)
+                {
+                    if(tempStrs[j] == tempStrs[i]){
+                        visited[j] = true;
+                        set.push_back(strs[j]);
+                    }
+                }    
+                res.push_back(set);
+            }   
+        }
+        
+        
+        return res;
+    }
+};
