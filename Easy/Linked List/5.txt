@@ -1,0 +1,91 @@
+# Palindrome Linked List
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        if(head == NULL)
+            return true;
+        if(head->next == NULL)
+            return true;
+        
+        ListNode* temp = head;
+        int len = 0;
+        while(temp!=NULL){
+            temp = temp->next;
+            len++;
+        }
+        
+        if(len%2 == 0){
+            int mid = len/2;
+            ListNode* prevNode;
+            ListNode* temp;
+            ListNode* prev = NULL;
+            ListNode* first = head;
+            
+            for(int i=1; i<=mid; i++){
+                prevNode = first;
+                first = first->next;
+            }
+            prevNode->next = NULL;
+            
+            while(first!=NULL){
+                temp = first->next;
+                first->next = prev;
+                prev = first;
+                first = temp;
+            }
+            
+            while(head!=NULL && prev!=NULL){
+                if(head->val == prev->val){
+                    head = head->next;
+                    prev = prev->next;
+                }
+                else{
+                    return false;
+                }
+            }
+            return true;
+        }
+        else{
+            int mid = len/2;
+            ListNode* prevNode;
+            ListNode* temp;
+            ListNode* prev = NULL;
+            ListNode* first = head;
+            
+            for(int i=1; i<=mid+1; i++){
+                prevNode = first;
+                first = first->next;
+            }
+            prevNode->next = NULL;
+            
+            while(first!=NULL){
+                temp = first->next;
+                first->next = prev;
+                prev = first;
+                first = temp;
+            }
+            
+            while(mid--){
+                if(head->val == prev->val){
+                    head = head->next;
+                    prev = prev->next;
+                }
+                else{
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+};

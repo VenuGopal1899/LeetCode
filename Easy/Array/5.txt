@@ -1,0 +1,23 @@
+# Single Number
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        unordered_multiset<int> hq;
+        
+        for(int i=0; i<nums.size(); i++){
+            hq.insert(nums[i]);
+        }
+        
+        int res = 0;
+        
+        for(auto it=hq.begin(); it!=hq.end(); it++)
+        {
+            if(hq.count(*it) == 1)
+                return *it;
+            
+            continue;
+        }
+        return -1;
+    }
+};

@@ -1,0 +1,52 @@
+# Valid Palindrome
+
+class Solution {
+public:
+    bool isPalindrome(string str) {
+        int len;
+        len = str.size();
+        if(len <= 1)
+            return true;
+        
+        vector<char> ch;
+        for(int i=0; i<len; i++){
+            if((str[i] >= 'A' && str[i] <='Z'))
+                ch.push_back(str[i]-('Z' -'z'));
+            else if(str[i] >= 'a' && str[i] <='z')
+                ch.push_back(str[i]);
+            else if(str[i] >= '0' && str[i] <= '9')
+                ch.push_back(str[i]);
+            else
+                continue;
+        }
+        
+        for(int i=0; i<ch.size(); i++)
+            cout<<ch[i]<<" : ";
+        
+        int l = ch.size();
+        if(l <= 1)
+            return true;
+        
+        if(l%2 == 0){
+            int index=0;
+            int mid = l/2;
+            while(index < mid){
+                if(ch[index] != ch[l-1-index])
+                    return false;
+                
+                index++;
+            }
+        }
+        else{
+            int index=0;
+            int mid = l/2;
+            while(index < mid){
+                if(ch[index] != ch[l-1-index])
+                    return false;
+                
+                index++;
+            }
+        }
+        return true;
+    }
+};
